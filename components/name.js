@@ -11,11 +11,11 @@ function Name({ name }) {
 
   return (
     <>
-      {cn
+      {data
         ? cn.map((obj) => {
             return obj.name;
           })
-        : { name }}
+        : `${name}`}
     </>
   );
 }
