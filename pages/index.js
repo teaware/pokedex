@@ -33,7 +33,7 @@ function HomePage() {
         />
       </Head>
       <section className="container py-6 mx-auto">
-        <h1 className="text-5xl text-center">寶可夢圖鑑</h1>
+        <h1 className="text-4xl text-center mb-2">寶可夢圖鑑</h1>
         <div className="flex flex-wrap">
           {pokemonList.map((pokemon) => {
             return pokemon.results.map((result) => (
