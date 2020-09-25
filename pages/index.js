@@ -1,12 +1,12 @@
 import React from "react";
 import Head from "next/head";
 import { useSWRInfinite, SWRConfig } from "swr";
-import Color from "../components/color";
+import Pokemon from "../components/pokemon";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 const PAGE_SIZE = 20;
 
-function HomePage() {
+function App() {
   const { data, error, size, setSize } = useSWRInfinite(
     (index) =>
       `https://pokeapi.co/api/v2/pokemon/?offset=${
@@ -37,9 +37,7 @@ function HomePage() {
         <div className="flex flex-wrap">
           {pokemonList.map((pokemon) => {
             return pokemon.results.map((result) => (
-              <SWRConfig key={result.name} value={{ fetcher }}>
-                <Color name={result.name} />
-              </SWRConfig>
+              <Pokemon key={result.name} name={result.name} />
             ));
           })}
         </div>
@@ -82,6 +80,14 @@ function HomePage() {
         </div>
       </section>
     </>
+  );
+}
+
+function HomePage() {
+  return (
+    <SWRConfig value={{ fetcher }}>
+      <App />
+    </SWRConfig>
   );
 }
 

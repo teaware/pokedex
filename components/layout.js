@@ -1,7 +1,6 @@
 import useSWR from "swr";
-import Pokemon from "./pokemon";
 
-function Color({ name }) {
+function Layout({ name, children }) {
   const { data } = useSWR(`https://pokeapi.co/api/v2/pokemon-species/${name}`);
 
   return (
@@ -11,10 +10,10 @@ function Color({ name }) {
           data ? data.color.name : "gray"
         }-500`}
       >
-        <Pokemon name={name} />
+        {children}
       </article>
     </div>
   );
 }
 
-export default Color;
+export default Layout;
