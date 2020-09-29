@@ -2,9 +2,7 @@ import useSWR from "swr";
 
 function Pokemon({ name }) {
   const { data: pokemon } = useSWR(`https://pokeapi.co/api/v2/pokemon/${name}`);
-  const { data: pokemonSpecies } = useSWR(
-    `https://pokeapi.co/api/v2/pokemon-species/${name}`
-  );
+  const { data: pokemonSpecies } = useSWR(() => pokemon.species.url);
 
   const names = pokemonSpecies ? [].concat(...pokemonSpecies.names) : [];
   const lan = names.filter((obj) => {
