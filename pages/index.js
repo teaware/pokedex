@@ -6,7 +6,7 @@ import Pokemon from "../components/pokemon";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 const PAGE_SIZE = 20;
 
-function App() {
+function CatchEmAll() {
   const { data, error, size, setSize } = useSWRInfinite(
     (index) =>
       `https://pokeapi.co/api/v2/pokemon/?offset=${
@@ -86,7 +86,7 @@ function App() {
 function HomePage() {
   return (
     <SWRConfig value={{ fetcher }}>
-      <App />
+      <CatchEmAll />
     </SWRConfig>
   );
 }
