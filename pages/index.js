@@ -27,10 +27,7 @@ function CatchEmAll() {
   return (
     <>
       <Head>
-        <link
-          href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
-          rel="stylesheet"
-        />
+        <title>寶可夢圖鑑</title>
       </Head>
       <section className="container py-6 mx-auto">
         <h1 className="text-4xl text-center mb-2">寶可夢圖鑑</h1>
