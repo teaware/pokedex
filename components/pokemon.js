@@ -11,6 +11,7 @@ function Pokemon({ name }) {
   const lan = names.filter((obj) => {
     return obj.language.name === "zh-Hant"; // SET the Language you want
   });
+  const theName = pokemonSpecies ? lan[0].name : "未知";
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,9 +25,7 @@ function Pokemon({ name }) {
               onClick={() => setIsOpen(!isOpen)}
             >
               <div>
-                <h2 className="text-lg capitalize mb-2">
-                  {pokemonSpecies ? lan[0].name : `${name}`}
-                </h2>
+                <h2 className="text-lg capitalize mb-2">{theName}</h2>
                 <div>
                   {pokemon.types.map((type) => (
                     <span
@@ -72,25 +71,27 @@ function Pokemon({ name }) {
                   className={`poke-detail p-2 h-screen w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 bg-${bgc}-500`}
                   style={{ maxHeight: 812 }}
                 >
-                  <div className="justify-between items-center px-1">
+                  <div className="flex justify-between items-center px-1">
                     <div>
-                      <h2 className="text-lg capitalize mb-2">
-                        {pokemonSpecies ? lan[0].name : `${name}`}
-                      </h2>
-                      <div>
-                        {pokemon.types.map((type) => (
-                          <span
-                            key={type.type.name}
-                            className="inline-block bg-gray-400 bg-opacity-25 rounded-lg px-2 text-sm text-gray-700 mr-2 mb-2"
-                          >
-                            {type.type.name}
-                          </span>
-                        ))}
-                      </div>
+                      <h2 className="text-lg capitalize mb-2">{`${name}`}</h2>
                     </div>
-                    <div className="w-24 h-24 ml-1">
-                      <img src={pokemon.sprites.front_default} />
-                    </div>
+                    <div>{pokemon.id}</div>
+                  </div>
+                  <div className="w-40 h-40">
+                    <img
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+                      alt={pokemon.name}
+                    />
+                  </div>
+                  <div>
+                    {pokemon.types.map((type) => (
+                      <span
+                        key={type.type.name}
+                        className="inline-block bg-gray-400 bg-opacity-25 rounded-lg px-2 text-sm text-gray-700 mr-2 mb-2"
+                      >
+                        {type.type.name}
+                      </span>
+                    ))}
                   </div>
                   <ul>
                     <li>
