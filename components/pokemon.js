@@ -41,11 +41,7 @@ function Pokemon({ name }) {
                 <img src={pokemon.sprites.front_default} />
               </div>
             </div>
-            <Transition
-              className="poke-detail fixed inset-0"
-              show={isOpen}
-              onClick={() => setIsOpen(!isOpen)}
-            >
+            <Transition className="poke-detail fixed inset-0" show={isOpen}>
               {/* Background overlay */}
               <Transition.Child
                 className="w-full h-screen bg-black opacity-75"
@@ -68,48 +64,56 @@ function Pokemon({ name }) {
                 leaveTo="translate-x-full"
               >
                 <div
-                  className={`poke-detail p-2 h-screen w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 bg-${bgc}-500`}
+                  className={`poke-detail p-4 h-screen w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 bg-${bgc}-500`}
                   style={{ maxHeight: 812 }}
                 >
-                  <div className="flex justify-between items-center px-1">
-                    <div>
-                      <h2 className="text-lg capitalize mb-2">{`${name}`}</h2>
+                  <div className="flex justify-between h-12 items-center px-1">
+                    <div
+                      className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-700"
+                      onClick={() => setIsOpen(!isOpen)}
+                    >
+                      ←
                     </div>
-                    <div>{pokemon.id}</div>
+                    <h2 className="font-mono text-2xl capitalize">{`${name}`}</h2>
+                    <div className="font-mono text-lg">#{pokemon.id}</div>
                   </div>
-                  <div className="w-40 h-40">
+                  <div className="text-center my-4">
                     <img
+                      className="w-40 h-40 m-auto"
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
                       alt={pokemon.name}
                     />
+                    <div className="text-5xl opacity-50">{theName}</div>
+                    <div className="my-2">
+                      {pokemon.types.map((type) => (
+                        <span
+                          key={type.type.name}
+                          className="inline-block bg-gray-400 bg-opacity-25 rounded-lg px-2 text-sm text-gray-700 mr-2 mb-2"
+                        >
+                          {type.type.name}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <div>
-                    {pokemon.types.map((type) => (
-                      <span
-                        key={type.type.name}
-                        className="inline-block bg-gray-400 bg-opacity-25 rounded-lg px-2 text-sm text-gray-700 mr-2 mb-2"
-                      >
-                        {type.type.name}
-                      </span>
-                    ))}
+
+                  <div className="rounded-md bg-white px-4 py-2 divide-y-2 divide-gray-500 divide-dotted">
+                    <div className="grid grid-cols-2 py-2">
+                      <div className="text-center">
+                        <span>身高</span>: {pokemon.height / 10} m
+                      </div>
+                      <div className="text-center">
+                        <span>體重</span>: {pokemon.weight / 10} kg
+                      </div>
+                    </div>
+                    <div className="py-2">
+                      {pokemon.stats.map((stat) => (
+                        <div key={stat.stat.name} className="py-1">
+                          <span className="uppercase">{stat.stat.name}</span>:{" "}
+                          {stat.base_stat}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <ul>
-                    <li>
-                      <span>身高</span>: {pokemon.height / 10} m
-                    </li>
-                    <li>
-                      <span>體重</span>: {pokemon.weight / 10} kg
-                    </li>
-                  </ul>
-                  <h3 className="text-lg">Stats</h3>
-                  <ul className="flex justify-start items-baseline flex-wrap">
-                    {pokemon.stats.map((stat) => (
-                      <li key={stat.stat.name} className="w-3/6">
-                        <span className="capitalize">{stat.stat.name}</span>:{" "}
-                        {stat.base_stat}
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               </Transition.Child>
             </Transition>
