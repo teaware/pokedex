@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { useSWRInfinite, SWRConfig } from "swr";
 import Pokemon from "../components/pokemon";
+import { motion } from 'framer-motion';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 const PAGE_SIZE = 20;
@@ -80,10 +81,23 @@ function CatchEmAll() {
   );
 }
 
+const homeVariants = {
+  initial: { scale: 0.96, y: 30, opacity: 0 },
+  enter: { scale: 1, y: 0, opacity: 1, transition: { duration: 0.5, ease: [0.48, 0.15, 0.25, 0.96] } },
+  exit: {
+    scale: 0.6,
+    y: 100,
+    opacity: 0,
+    transition: { duration: 0.2, ease: [0.48, 0.15, 0.25, 0.96] }
+  }
+};
+
 function HomePage() {
   return (
     <SWRConfig value={{ fetcher }}>
-      <CatchEmAll />
+      <motion.div initial="initial" animate="enter" exit="exit" variants={homeVariants}>
+        <CatchEmAll />
+      </motion.div>
     </SWRConfig>
   );
 }

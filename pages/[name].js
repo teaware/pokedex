@@ -1,4 +1,26 @@
 import Link from "next/link";
+import { motion } from 'framer-motion';
+
+const easing = [0.175, 0.85, 0.42, 0.96];
+const backVariants = {
+  exit: {
+    x: 100,
+    opacity: 0,
+    transition: {
+      duration: 0.5,
+      ease: easing
+    }
+  },
+  enter: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      delay: 0.5,
+      duration: 0.5,
+      ease: easing
+    }
+  }
+};
 
 function Post({ pokemon, pokemonSpecies }) {
   const bgc = pokemonSpecies ? pokemonSpecies.color.name : "gray"; // background-color
@@ -9,26 +31,28 @@ function Post({ pokemon, pokemonSpecies }) {
   const theName = pokemonSpecies ? lan[0].name : name;
 
   return (
+    <motion.div initial="exit" animate="enter" exit="exit" variants={backVariants}>
     <div
       className={`poke-detail p-4 h-screen w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto bg-${bgc}-500`}
       style={{ maxHeight: 812 }}
     >
+      
       <div className="flex justify-between h-12 items-center px-1">
         <Link href="/">
           <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-700">
             ←
           </a>
         </Link>
-
         <h2 className="font-mono text-2xl capitalize">{pokemon.name}</h2>
         <div className="font-mono text-lg">#{pokemon.id}</div>
       </div>
       <div className="text-center my-4">
+        <div className="w-40 h-40 m-auto">
         <img
-          className="w-40 h-40 m-auto"
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
           alt={pokemon.name}
         />
+        </div>
         <div className="text-5xl opacity-50">{theName}</div>
         <div className="my-2">
           {pokemon.types.map((type) => (
@@ -60,7 +84,9 @@ function Post({ pokemon, pokemonSpecies }) {
           ))}
         </div>
       </div>
+      
     </div>
+    </motion.div>
   );
 }
 

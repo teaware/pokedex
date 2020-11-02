@@ -1,6 +1,4 @@
 import useSWR from "swr";
-import { Transition } from "@headlessui/react";
-import { useState } from "react";
 import Link from "next/link";
 
 function Pokemon({ name }) {
@@ -18,7 +16,8 @@ function Pokemon({ name }) {
     <div className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4">
       <article className={`rounded-md shadow-md w-full p-2 bg-${bgc}-500`}>
         {pokemon ? (
-          <>
+          <Link href={`/${name}`} scroll={false}>
+            <a>
             <div className="poke-name flex justify-between items-center px-1">
               <div>
                 <h2 className="text-lg capitalize mb-2">{theName}</h2>
@@ -34,14 +33,11 @@ function Pokemon({ name }) {
                 </div>
               </div>
               <div className="w-24 h-24 ml-1">
-                <Link href={`/${name}`} scroll={false}>
-                  <a>
-                    <img src={pokemon.sprites.front_default} alt={name} />
-                  </a>
-                </Link>
+                <img src={pokemon.sprites.front_default} alt={name} />
               </div>
             </div>
-          </>
+            </a>
+          </Link>
         ) : (
           <p className="font-bold text-l capitalize">Loading {name}...</p>
         )}
