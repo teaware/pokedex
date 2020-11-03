@@ -16,26 +16,26 @@ function Pokemon({ name }) {
     <div className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4">
       <article className={`rounded-md shadow-md w-full p-2 bg-${bgc}-500`}>
         {pokemon ? (
-          <Link href={`/${name}`} scroll={false}>
+          <Link href={`/${name}`}>
             <a>
-            <div className="poke-name flex justify-between items-center px-1">
-              <div>
-                <h2 className="text-lg capitalize mb-2">{theName}</h2>
+              <div className="poke-name flex justify-between items-center px-1">
                 <div>
-                  {pokemon.types.map((type) => (
-                    <span
-                      key={type.type.name}
-                      className="inline-block bg-gray-400 bg-opacity-25 rounded-lg px-2 text-sm text-gray-700 mr-2 mb-2"
-                    >
-                      {type.type.name}
-                    </span>
-                  ))}
+                  <h2 className="text-lg capitalize mb-2">{theName}</h2>
+                  <div>
+                    {pokemon.types.map((type) => (
+                      <span
+                        key={type.type.name}
+                        className="inline-block bg-gray-400 bg-opacity-25 rounded-lg px-2 text-sm text-gray-700 mr-2 mb-2"
+                      >
+                        {type.type.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="w-24 h-24 ml-1">
+                  <img src={pokemon.sprites.front_default} alt={name} />
                 </div>
               </div>
-              <div className="w-24 h-24 ml-1">
-                <img src={pokemon.sprites.front_default} alt={name} />
-              </div>
-            </div>
             </a>
           </Link>
         ) : (
