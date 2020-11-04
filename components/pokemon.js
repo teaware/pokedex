@@ -73,31 +73,48 @@ function Pokemon({ expanded, setExpanded, name }) {
                       <h2 className="font-mono text-2xl capitalize">
                         {pokemon.name}
                       </h2>
-                      <div
-                        className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-700"
+                      <svg
+                        className="cursor-pointer w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
                         onClick={() => setExpanded(isOpen ? false : name)}
                       >
-                        x
-                      </div>
-                    </div>
-                    <div className="text-center my-4">
-                      <div className="w-40 h-40 m-auto">
-                        <motion.img
-                          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
-                          alt={pokemon.name}
-                          variants={imageVariants}
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
                         />
+                      </svg>
+                    </div>
+                    <div className="flex justify-between items-center px-1">
+                      <div className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-700">
+                        ←
                       </div>
-                      <div className="text-5xl opacity-50">{theName}</div>
-                      <div className="my-2">
-                        {pokemon.types.map((type) => (
-                          <span
-                            key={type.type.name}
-                            className="inline-block bg-gray-400 bg-opacity-25 rounded-lg px-2 text-sm text-gray-700 mr-2 mb-2"
-                          >
-                            {type.type.name}
-                          </span>
-                        ))}
+                      <div className="text-center my-4">
+                        <div className="w-40 h-40 m-auto">
+                          <motion.img
+                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+                            alt={pokemon.name}
+                            variants={imageVariants}
+                          />
+                        </div>
+                        <div className="text-5xl opacity-50">{theName}</div>
+                        <div className="my-2">
+                          {pokemon.types.map((type) => (
+                            <span
+                              key={type.type.name}
+                              className="inline-block bg-gray-400 bg-opacity-25 rounded-lg px-2 text-sm text-gray-700 mr-2 mb-2"
+                            >
+                              {type.type.name}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-700">
+                        →
                       </div>
                     </div>
                     <motion.div
@@ -121,18 +138,6 @@ function Pokemon({ expanded, setExpanded, name }) {
                         ))}
                       </div>
                     </motion.div>
-                    <div className="flex justify-between h-12 items-center px-1 my-4">
-                      <Link href="">
-                        <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-700">
-                          ←
-                        </a>
-                      </Link>
-                      <Link href="">
-                        <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-700">
-                          →
-                        </a>
-                      </Link>
-                    </div>
                   </motion.div>
                 </div>
               </motion.div>
