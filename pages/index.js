@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import Head from "next/head";
 import { useSWRInfinite, SWRConfig } from "swr";
 import Pokemon from "../components/pokemon";
@@ -24,6 +24,8 @@ function CatchEmAll() {
   const isReachingEnd =
     isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
 
+  const [expanded, setExpanded] = useState(false, "");
+
   return (
     <>
       <Head>
@@ -34,7 +36,12 @@ function CatchEmAll() {
         <div className="flex flex-wrap">
           {pokemonList.map((pokemon) => {
             return pokemon.results.map((result) => (
-              <Pokemon key={result.name} name={result.name} />
+              <Pokemon
+                key={result.name}
+                expanded={expanded}
+                setExpanded={setExpanded}
+                name={result.name}
+              />
             ));
           })}
         </div>
