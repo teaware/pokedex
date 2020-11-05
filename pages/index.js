@@ -24,7 +24,7 @@ function CatchEmAll() {
   const isReachingEnd =
     isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
 
-  const [expanded, setExpanded] = useState(false, "");
+  const [open, setOpen] = useState(false, "");
 
   return (
     <>
@@ -38,8 +38,8 @@ function CatchEmAll() {
             return pokemon.results.map((result) => (
               <Pokemon
                 key={result.name}
-                expanded={expanded}
-                setExpanded={setExpanded}
+                open={open}
+                setOpen={setOpen}
                 name={result.name}
               />
             ));

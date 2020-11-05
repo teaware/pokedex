@@ -1,8 +1,7 @@
 import useSWR from "swr";
-import Link from "next/link";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 
-function Pokemon({ expanded, setExpanded, name }) {
+function Pokemon({ open, setOpen, name }) {
   const { data: pokemon } = useSWR(`https://pokeapi.co/api/v2/pokemon/${name}`);
   const { data: pokemonSpecies } = useSWR(() => pokemon.species.url);
 
@@ -13,16 +12,16 @@ function Pokemon({ expanded, setExpanded, name }) {
   });
   const theName = pokemonSpecies ? lan[0].name : name;
 
-  const isOpen = name === expanded;
+  const isOpen = name === open;
 
   return (
-    <AnimateSharedLayout type="crossfade">
+    <AnimateSharedLayout>
       <div className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4">
         <article className={`rounded-md shadow-md w-full p-2 bg-${bgc}-500`}>
           {pokemon ? (
             <div
               className="poke-name flex justify-between items-center px-1"
-              onClick={() => setExpanded(isOpen ? false : name)}
+              onClick={() => setOpen(isOpen ? false : name)}
             >
               <div>
                 <h2 className="text-lg capitalize mb-2">{theName}</h2>
@@ -73,50 +72,49 @@ function Pokemon({ expanded, setExpanded, name }) {
                       <h2 className="font-mono text-2xl capitalize">
                         {pokemon.name}
                       </h2>
-                      <svg
-                        className="cursor-pointer w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={() => setExpanded(isOpen ? false : name)}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </div>
-                    <div className="flex justify-between items-center px-1">
-                      <div className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-700">
-                        ←
-                      </div>
-                      <div className="text-center my-4">
-                        <div className="w-40 h-40 m-auto">
-                          <motion.img
-                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
-                            alt={pokemon.name}
-                            variants={imageVariants}
+                      <div className="cursor-pointer rounded-full h-8 w-8 flex items-center justify-center text-2xl bg-gray-300 bg-opacity-75">
+                        <svg
+                          className="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                          onClick={() => setOpen(isOpen ? false : name)}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
                           />
-                        </div>
-                        <div className="text-5xl opacity-50">{theName}</div>
-                        <div className="my-2">
-                          {pokemon.types.map((type) => (
-                            <span
-                              key={type.type.name}
-                              className="inline-block bg-gray-400 bg-opacity-25 rounded-lg px-2 text-sm text-gray-700 mr-2 mb-2"
-                            >
-                              {type.type.name}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-700">
-                        →
+                        </svg>
                       </div>
                     </div>
+
+                    <div className="text-center my-4">
+                      <div className="w-40 h-40 m-auto">
+                        <motion.img
+                          // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+                          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${(
+                            "00" + pokemon.id
+                          ).slice(-3)}.png`}
+                          alt={pokemon.name}
+                          variants={imageVariants}
+                        />
+                      </div>
+                      <div className="text-5xl opacity-50">{theName}</div>
+                      <div className="my-2">
+                        {pokemon.types.map((type) => (
+                          <span
+                            key={type.type.name}
+                            className="inline-block bg-gray-400 bg-opacity-25 rounded-lg px-2 text-sm text-gray-700 mr-2 mb-2"
+                          >
+                            {type.type.name}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
                     <motion.div
                       className="rounded-md bg-white px-4 py-2 divide-y-2 divide-gray-500 divide-dotted"
                       variants={textVariants}
