@@ -15,12 +15,12 @@ function Pokemon({ open, setOpen, name }) {
   const isOpen = name === open;
 
   return (
-    <AnimateSharedLayout>
+    <AnimateSharedLayout type="crossfade">
       <div className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4">
         <article className={`rounded-md shadow-md w-full p-2 bg-${bgc}-500`}>
           {pokemon ? (
             <div
-              className="poke-name flex justify-between items-center px-1"
+              className={`poke-name id-${pokemon.id} flex justify-between items-center px-1`}
               onClick={() => setOpen(isOpen ? false : name)}
             >
               <div>
@@ -94,10 +94,10 @@ function Pokemon({ open, setOpen, name }) {
                     <div className="text-center my-4">
                       <div className="w-40 h-40 m-auto">
                         <motion.img
-                          // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
-                          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${(
-                            "00" + pokemon.id
-                          ).slice(-3)}.png`}
+                          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+                          // src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${(
+                          //   "00" + pokemon.id
+                          // ).slice(-3)}.png`}
                           alt={pokemon.name}
                           variants={imageVariants}
                         />
