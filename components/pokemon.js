@@ -61,7 +61,7 @@ function Pokemon({ open, setOpen, name }) {
                 ></motion.div>
                 <div className="fixed inset-0 w-full h-screen flex justify-center items-center">
                   <motion.div
-                    className={`poke-detail p-4 h-screen w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto bg-${bgc}-500`}
+                    className={`poke-detail rounded-lg p-4 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto bg-${bgc}-500`}
                     style={{ maxHeight: 812 }}
                     variants={backVariants}
                   >
@@ -69,9 +69,9 @@ function Pokemon({ open, setOpen, name }) {
                       <div className="font-mono text-lg">
                         #{("00" + pokemon.id).slice(-3)}
                       </div>
-                      <h2 className="font-mono text-2xl capitalize">
+                      {/* <h2 className="font-mono text-2xl capitalize">
                         {pokemon.name}
-                      </h2>
+                      </h2> */}
                       <div className="cursor-pointer rounded-full h-8 w-8 flex items-center justify-center text-2xl bg-gray-300 bg-opacity-75">
                         <svg
                           className="w-6 h-6"
@@ -92,7 +92,7 @@ function Pokemon({ open, setOpen, name }) {
                     </div>
 
                     <div className="text-center my-4">
-                      <div className="w-40 h-40 m-auto">
+                      <div className={`w-40 h-40 m-auto -mt-32`}>
                         <motion.img
                           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
                           // src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${(
