@@ -24,7 +24,7 @@ function CatchEmAll() {
   const isReachingEnd =
     isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
 
-  const [open, setOpen] = useState(false, "");
+  const [open, setOpen] = useState("");
 
   return (
     <>
