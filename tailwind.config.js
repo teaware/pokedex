@@ -2,7 +2,14 @@ module.exports = {
   purge: {
     content: ["./pages/**/*.js", "./components/**/*.js", "./layouts/**/*.js"],
     options: {
-      safelist: ["bg-red-400", "bg-green-400", "bg-yellow-400", "bg-blue-400"],
+      safelist: [
+        "bg-red-400",
+        "bg-green-400",
+        "bg-yellow-400",
+        "bg-blue-400",
+        "bg-purple-400",
+        "bg-pink-400",
+      ],
     },
   },
   darkMode: false,
