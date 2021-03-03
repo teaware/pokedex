@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 function Pokemon({ open, setOpen, name }) {
   const { data: pokemon } = useSWR(`https://pokeapi.co/api/v2/pokemon/${name}`);
@@ -37,9 +38,11 @@ function Pokemon({ open, setOpen, name }) {
                 </div>
               </div>
               <div className="w-16 h-16 ml-1">
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+                <Image
+                  src={pokemon.sprites.front_default}
                   alt={name}
+                  width="64"
+                  height="64"
                 />
               </div>
             </div>
@@ -52,7 +55,7 @@ function Pokemon({ open, setOpen, name }) {
           <AnimatePresence initial={false}>
             {isOpen && (
               <motion.div
-                className="fixed inset-0"
+                className="fixed inset-0 z-10"
                 key="content"
                 initial="exit"
                 animate="enter"
@@ -95,16 +98,17 @@ function Pokemon({ open, setOpen, name }) {
                     </div>
 
                     <div className="text-center my-4">
-                      <div className={`w-40 h-40 m-auto -mt-32`}>
-                        <motion.img
-                          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
-                          // src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${(
-                          //   "00" + pokemon.id
-                          // ).slice(-3)}.png`}
+                      <motion.div
+                        className="w-40 h-40 m-auto -mt-32"
+                        variants={imageVariants}
+                      >
+                        <Image
+                          src={pokemon.sprites.other.dream_world.front_default}
+                          width="160"
+                          height="160"
                           alt={pokemon.name}
-                          variants={imageVariants}
                         />
-                      </div>
+                      </motion.div>
                       <div className="text-5xl opacity-50">{theName}</div>
                       <div className="my-2">
                         {pokemon.types.map((type) => (
