@@ -2,7 +2,7 @@ import useSWR from "swr";
 import Link from "next/link";
 import Image from "next/image";
 
-function Pokemon({ name, id }) {
+export default function Pokemon({ name, id }) {
   const { data: pokemon } = useSWR(`https://pokeapi.co/api/v2/pokemon/${id}`);
   const { data: pokemonSpecies } = useSWR(() => pokemon.species.url);
 
@@ -48,5 +48,3 @@ function Pokemon({ name, id }) {
     </div>
   );
 }
-
-export default Pokemon;
