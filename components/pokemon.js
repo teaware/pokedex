@@ -20,7 +20,7 @@ function Pokemon({ open, setOpen, name }) {
   return (
     <AnimateSharedLayout type="crossfade">
       <div className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4">
-        <article className={`rounded-md shadow-md w-full p-3 ${bgc}`}>
+        <article className="rounded-md shadow-md w-full p-3 bg-white">
           {pokemon ? (
             <div
               className={`poke-name id-${pokemon.id} flex justify-between items-center px-1`}

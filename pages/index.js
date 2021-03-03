@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
-import { useSWRInfinite, SWRConfig } from "swr";
+import { useSWRInfinite } from "swr";
 import Pokemon from "../components/pokemon";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -132,11 +132,7 @@ function CatchEmAll() {
 }
 
 export default function Home() {
-  return (
-    <SWRConfig value={{ fetcher }}>
-      <CatchEmAll />
-    </SWRConfig>
-  );
+  return <CatchEmAll />;
 }
 
 function SkeletonPoke({ type = "short" }) {
