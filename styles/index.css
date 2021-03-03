@@ -6,12 +6,12 @@ body {
   @apply bg-gray-300;
 }
 
-.bg-white-500 {
+.bg-white-400 {
   background-color: #f5f4f4;
 }
-.bg-brown-500 {
+.bg-brown-400 {
   background-color: #cd9777;
 }
-.bg-black-500 {
+.bg-black-400 {
   background-color: #6c757d;
 }

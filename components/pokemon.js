@@ -6,7 +6,9 @@ function Pokemon({ open, setOpen, name }) {
   const { data: pokemon } = useSWR(`https://pokeapi.co/api/v2/pokemon/${name}`);
   const { data: pokemonSpecies } = useSWR(() => pokemon.species.url);
 
-  const bgc = pokemonSpecies ? pokemonSpecies.color.name : "gray"; // background-color
+  const bgc = pokemonSpecies
+    ? "bg-" + pokemonSpecies.color.name + "-400"
+    : "bg-gray-400"; // background-color
   const names = pokemonSpecies ? [].concat(...pokemonSpecies.names) : [];
   const lan = names.filter((obj) => {
     return obj.language.name === "zh-Hant"; // SET the Language you want
@@ -18,7 +20,7 @@ function Pokemon({ open, setOpen, name }) {
   return (
     <AnimateSharedLayout type="crossfade">
       <div className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4">
-        <article className={`rounded-md shadow-md w-full p-3 bg-${bgc}-500`}>
+        <article className={`rounded-md shadow-md w-full p-3 ${bgc}`}>
           {pokemon ? (
             <div
               className={`poke-name id-${pokemon.id} flex justify-between items-center px-1`}
@@ -67,7 +69,7 @@ function Pokemon({ open, setOpen, name }) {
                 ></motion.div>
                 <div className="fixed inset-0 w-full h-screen flex justify-center items-center">
                   <motion.div
-                    className={`poke-detail rounded-lg p-4 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto bg-${bgc}-500`}
+                    className={`poke-detail rounded-lg p-4 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto ${bgc}`}
                     style={{ maxHeight: 812 }}
                     variants={backVariants}
                   >
