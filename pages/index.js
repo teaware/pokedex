@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
 import { useSWRInfinite } from "swr";
-import Pokemon from "../components/pokemon";
+import Pokemon from "../components/Pokemon";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 const PAGE_SIZE = 20;
@@ -31,15 +31,15 @@ function CatchEmAll() {
       <Head>
         <title>寶可夢圖鑑</title>
       </Head>
-      <section className="container py-6 mx-auto">
-        <h1 className="text-4xl text-center mb-2">寶可夢圖鑑</h1>
+      <section className="container px-4 py-6 mx-auto">
+        <h1 className="text-4xl text-center mb-4">寶可夢圖鑑</h1>
         {isLoadingInitialData ? (
-          <div className="flex flex-wrap">
-            <div className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 animate-pulse">
+          <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="animate-pulse">
               <SkeletonPoke type="short" />
             </div>
             <div
-              className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 animate-pulse"
+              className="animate-pulse"
               style={{
                 animationFillMode: "backwards",
                 animationDelay: "150ms",
@@ -48,7 +48,7 @@ function CatchEmAll() {
               <SkeletonPoke type="long" />
             </div>
             <div
-              className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 animate-pulse"
+              className="animate-pulse"
               style={{
                 animationFillMode: "backwards",
                 animationDelay: "150ms",
@@ -57,7 +57,7 @@ function CatchEmAll() {
               <SkeletonPoke type="long" />
             </div>
             <div
-              className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 animate-pulse"
+              className="animate-pulse"
               style={{
                 animationFillMode: "backwards",
                 animationDelay: "300ms",
@@ -66,7 +66,7 @@ function CatchEmAll() {
               <SkeletonPoke type="short" />
             </div>
             <div
-              className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 animate-pulse"
+              className="animate-pulse"
               style={{
                 animationFillMode: "backwards",
                 animationDelay: "450ms",
@@ -76,7 +76,7 @@ function CatchEmAll() {
             </div>
           </div>
         ) : (
-          <div className="flex flex-wrap">
+          <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {pokemonList.map((pokemon) => {
               return pokemon.results.map((result) => (
                 <Pokemon
@@ -84,6 +84,7 @@ function CatchEmAll() {
                   open={open}
                   setOpen={setOpen}
                   name={result.name}
+                  id={result.url.split("pokemon/")[1].split("/")[0]}
                 />
               ));
             })}
@@ -137,7 +138,7 @@ export default function Home() {
 
 function SkeletonPoke({ type = "short" }) {
   return (
-    <div className="rounded-md shadow-md w-full p-3 bg-gray-200">
+    <div className="rounded-md shadow-md w-full p-2 bg-gray-200">
       <div className="flex justify-between items-center px-1">
         {type === "short" ? (
           <div>
