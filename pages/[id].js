@@ -95,7 +95,7 @@ function Post({ pokemon, pokemonSpecies }) {
 // This function gets called at build time
 export async function getStaticPaths() {
   // Call an external API endpoint to get posts
-  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=893");
+  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=200");
   const posts = await res.json();
 
   const paths = posts.results.map((post) => ({
