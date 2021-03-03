@@ -33,18 +33,62 @@ function CatchEmAll() {
       </Head>
       <section className="container py-6 mx-auto">
         <h1 className="text-4xl text-center mb-2">寶可夢圖鑑</h1>
-        <div className="flex flex-wrap">
-          {pokemonList.map((pokemon) => {
-            return pokemon.results.map((result) => (
-              <Pokemon
-                key={result.name}
-                open={open}
-                setOpen={setOpen}
-                name={result.name}
-              />
-            ));
-          })}
-        </div>
+        {isLoadingInitialData ? (
+          <div className="flex flex-wrap">
+            <div className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 animate-pulse">
+              <SkeletonPoke type="short" />
+            </div>
+            <div
+              className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 animate-pulse"
+              style={{
+                animationFillMode: "backwards",
+                animationDelay: "150ms",
+              }}
+            >
+              <SkeletonPoke type="long" />
+            </div>
+            <div
+              className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 animate-pulse"
+              style={{
+                animationFillMode: "backwards",
+                animationDelay: "150ms",
+              }}
+            >
+              <SkeletonPoke type="long" />
+            </div>
+            <div
+              className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 animate-pulse"
+              style={{
+                animationFillMode: "backwards",
+                animationDelay: "300ms",
+              }}
+            >
+              <SkeletonPoke type="short" />
+            </div>
+            <div
+              className="p-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 animate-pulse"
+              style={{
+                animationFillMode: "backwards",
+                animationDelay: "450ms",
+              }}
+            >
+              <SkeletonPoke type="long" />
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-wrap">
+            {pokemonList.map((pokemon) => {
+              return pokemon.results.map((result) => (
+                <Pokemon
+                  key={result.name}
+                  open={open}
+                  setOpen={setOpen}
+                  name={result.name}
+                />
+              ));
+            })}
+          </div>
+        )}
         <div className="mx-auto py-10 w-1/2 text-center">
           <button
             className="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
@@ -87,7 +131,7 @@ function CatchEmAll() {
   );
 }
 
-function HomePage() {
+export default function Home() {
   return (
     <SWRConfig value={{ fetcher }}>
       <CatchEmAll />
@@ -95,4 +139,23 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+function SkeletonPoke({ type = "short" }) {
+  return (
+    <div className="rounded-md shadow-md w-full p-3 bg-gray-200">
+      <div className="flex justify-between items-center px-1">
+        {type === "short" ? (
+          <div>
+            <div className="w-16 h-4 bg-gray-400 rounded-md mb-2"></div>
+            <div className="w-12 h-4 bg-gray-300 rounded-md"></div>
+          </div>
+        ) : (
+          <div>
+            <div className="w-20 h-4 bg-gray-400 rounded-md mb-2"></div>
+            <div className="w-24 h-4 bg-gray-300 rounded-md"></div>
+          </div>
+        )}
+        <div className="w-16 h-16 ml-1 bg-gray-400 rounded-sm"></div>
+      </div>
+    </div>
+  );
+}
