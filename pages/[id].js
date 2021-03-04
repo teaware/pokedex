@@ -23,6 +23,62 @@ const backVariants = {
   },
 };
 
+const HomeIcon = (props) => {
+  return (
+    <svg
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+      />
+    </svg>
+  );
+};
+const LeftIcon = (props) => {
+  return (
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M10 19l-7-7m0 0l7-7m-7 7h18"
+      />
+    </svg>
+  );
+};
+
+const RightIcon = (props) => {
+  return (
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M14 5l7 7m0 0l-7 7m7-7H3"
+      />
+    </svg>
+  );
+};
+
 function Post({ pokemon, pokemonSpecies }) {
   const bgc = pokemonSpecies
     ? "bg-" + pokemonSpecies.color.name + "-400"
@@ -42,22 +98,9 @@ function Post({ pokemon, pokemonSpecies }) {
     >
       <div className="h-screen w-full">
         <div className="fixed inset-0 flex w-full justify-between h-20 px-4 items-center">
-          <Link href="/" scroll={false}>
-            <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-700">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                />
-              </svg>
+          <Link href="/">
+            <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-600">
+              <HomeIcon className="w-6 h-6" />
             </a>
           </Link>
           <h2 className="font-mono text-2xl capitalize">{pokemon.name}</h2>
@@ -68,49 +111,23 @@ function Post({ pokemon, pokemonSpecies }) {
           {pokemon.id === 1 ? (
             <button
               disabled
-              className="rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-700 opacity-50 cursor-not-allowed"
+              className="rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-600 opacity-50 cursor-not-allowed mr-8"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
-              </svg>
+              <LeftIcon />
             </button>
           ) : (
             <Link href={`/${pokemon.id - 1}`}>
-              <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-700">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                  />
-                </svg>
+              <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-600 mr-8">
+                <LeftIcon />
               </a>
             </Link>
           )}
 
-          <div className="pokemon w-full sm:w-1/2 max-w-lg mx-8">
+          <div className="pokemon w-full sm:w-1/2 max-w-lg">
             <div
-              className={`poke-img rounded-t-md text-center pt-32 pb-4 ${bgc} relative`}
+              className={`poke-img rounded-t-md text-center pt-24 pb-4 ${bgc} relative`}
             >
-              <div className="absolute left-1/2 -top-16 transform -translate-x-1/2 w-40 h-40 m-auto">
+              <div className="absolute left-1/2 -top-20 transform -translate-x-1/2 w-40 h-40 m-auto">
                 <Image
                   src={pokemon.officialArtwork}
                   alt={pokemon.name}
@@ -153,40 +170,14 @@ function Post({ pokemon, pokemonSpecies }) {
           {pokemon.id === 200 ? (
             <button
               disabled
-              className="rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-700 opacity-50 cursor-not-allowed"
+              className="rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-600 opacity-50 cursor-not-allowed ml-8"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
-              </svg>
+              <RightIcon />
             </button>
           ) : (
             <Link href={`/${pokemon.id + 1}`}>
-              <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-700">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
+              <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-600 ml-8">
+                <RightIcon />
               </a>
             </Link>
           )}
