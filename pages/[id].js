@@ -127,7 +127,7 @@ function Post({ pokemon, pokemonSpecies }) {
             <div
               className={`poke-img rounded-t-md text-center pt-24 pb-4 ${bgc} relative`}
             >
-              <div className="absolute left-1/2 -top-20 transform -translate-x-1/2 w-40 h-40 m-auto">
+              <div className="absolute left-1/2 -top-16 transform -translate-x-1/2 w-40 h-40 m-auto">
                 <Image
                   src={pokemon.officialArtwork}
                   alt={pokemon.name}
