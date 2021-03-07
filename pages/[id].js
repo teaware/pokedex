@@ -103,7 +103,7 @@ function Post({ pokemon, pokemonSpecies }) {
               <HomeIcon className="w-6 h-6" />
             </a>
           </Link>
-          <h2 className="font-mono text-2xl capitalize">{pokemon.name}</h2>
+          {/* <h2 className="font-mono text-2xl capitalize">{pokemon.name}</h2> */}
           <div className="font-mono text-lg">#{pokemon.paddedId}</div>
         </div>
 
