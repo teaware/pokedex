@@ -3,21 +3,26 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const easing = [0.175, 0.85, 0.42, 0.96];
-const backVariants = {
-  exit: {
-    y: 100,
-    opacity: 0,
+
+const stagger = {
+  animate: {
     transition: {
-      duration: 0.5,
-      ease: easing,
+      staggerChildren: 0.075,
     },
   },
-  enter: {
+};
+
+const fadeInUp = {
+  initial: {
+    y: 60,
+    opacity: 0,
+    transition: { duration: 0.6, ease: easing },
+  },
+  animate: {
     y: 0,
     opacity: 1,
     transition: {
-      delay: 0.5,
-      duration: 0.5,
+      duration: 0.6,
       ease: easing,
     },
   },
@@ -90,12 +95,7 @@ function Post({ pokemon, pokemonSpecies }) {
   const theName = pokemonSpecies ? lan[0].name : pokemon.name;
 
   return (
-    <motion.div
-      initial="exit"
-      animate="enter"
-      exit="exit"
-      variants={backVariants}
-    >
+    <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <div className="h-screen w-full">
         <div className="fixed inset-0 flex w-full justify-between h-20 px-4 items-center">
           <Link href="/">
@@ -123,18 +123,28 @@ function Post({ pokemon, pokemonSpecies }) {
             </Link>
           )}
 
-          <div className="pokemon w-full sm:w-1/2 max-w-lg">
-            <div
+          <motion.div
+            variants={stagger}
+            className="pokemon w-full sm:w-1/2 max-w-lg"
+          >
+            <motion.div
               className={`poke-img rounded-t-md text-center pt-24 pb-4 ${bgc} relative`}
+              variants={fadeInUp}
             >
-              <div className="absolute left-1/2 -top-16 transform -translate-x-1/2 w-40 h-40 m-auto">
+              <motion.div
+                className="absolute left-1/2 -top-16 transform -translate-x-1/2 w-40 h-40 m-auto"
+                animate={{ scale: 1, opacity: 1 }}
+                initial={{ scale: 0.5, opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ delay: 0.2 }}
+              >
                 <Image
                   src={pokemon.officialArtwork}
                   alt={pokemon.name}
                   width="475"
                   height="475"
                 />
-              </div>
+              </motion.div>
               <div className="text-5xl opacity-50">{theName}</div>
               <div className="my-2">
                 {pokemon.types.map((type) => (
@@ -146,8 +156,11 @@ function Post({ pokemon, pokemonSpecies }) {
                   </span>
                 ))}
               </div>
-            </div>
-            <div className="poke-data rounded-b-md bg-white px-4 py-2 divide-y-2 divide-gray-500 divide-dotted">
+            </motion.div>
+            <motion.div
+              variants={fadeInUp}
+              className="poke-data rounded-b-md bg-white px-4 py-2 divide-y-2 divide-gray-500 divide-dotted"
+            >
               <div className="grid grid-cols-2 py-2">
                 <div className="text-center">
                   <span>身高</span>: {pokemon.height / 10} m
@@ -164,8 +177,8 @@ function Post({ pokemon, pokemonSpecies }) {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {pokemon.id === 200 ? (
             <button

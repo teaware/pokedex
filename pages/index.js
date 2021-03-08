@@ -2,6 +2,33 @@ import { useState } from "react";
 import Head from "next/head";
 import { useSWRInfinite } from "swr";
 import Pokemon from "../components/Pokemon";
+import { motion } from "framer-motion";
+
+const easing = [0.6, -0.05, 0.01, 0.99];
+
+const fadeInUp = {
+  initial: {
+    y: 60,
+    opacity: 0,
+    transition: { duration: 0.6, ease: easing },
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+    },
+  },
+};
+
+const stagger = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 const PAGE_SIZE = 20;
@@ -27,14 +54,22 @@ function CatchEmAll() {
   const [open, setOpen] = useState("");
 
   return (
-    <>
+    <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <Head>
         <title>寶可夢圖鑑</title>
       </Head>
-      <section className="container px-4 py-6 mx-auto">
-        <h1 className="text-4xl text-center mb-4">寶可夢圖鑑</h1>
+      <motion.section
+        variants={stagger}
+        className="container px-4 py-6 mx-auto"
+      >
+        <motion.h1 variants={fadeInUp} className="text-4xl text-center mb-4">
+          寶可夢圖鑑
+        </motion.h1>
         {isLoadingInitialData ? (
-          <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <motion.div
+            variants={fadeInUp}
+            className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          >
             <div className="animate-pulse">
               <SkeletonPoke type="short" />
             </div>
@@ -74,9 +109,12 @@ function CatchEmAll() {
             >
               <SkeletonPoke type="long" />
             </div>
-          </div>
+          </motion.div>
         ) : (
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <motion.div
+            variants={fadeInUp}
+            className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          >
             {pokemonList.map((pokemon) => {
               return pokemon.results.map((result) => (
                 <Pokemon
@@ -88,9 +126,12 @@ function CatchEmAll() {
                 />
               ));
             })}
-          </div>
+          </motion.div>
         )}
-        <div className="mx-auto py-10 w-1/2 text-center">
+        <motion.div
+          variants={fadeInUp}
+          className="mx-auto py-10 w-1/2 text-center"
+        >
           <button
             className="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
             disabled={isLoadingMore || isReachingEnd}
@@ -126,9 +167,9 @@ function CatchEmAll() {
               "Load More Pokémon"
             )}
           </button>
-        </div>
-      </section>
-    </>
+        </motion.div>
+      </motion.section>
+    </motion.div>
   );
 }
 
