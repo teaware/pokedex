@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-gray-300;
-}
-
 .bg-white-400 {
   background-color: #f5f4f4;
 }
