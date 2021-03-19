@@ -135,8 +135,8 @@ function Post({ pokemon, pokemonSpecies }) {
               >
                 <motion.div
                   className="absolute left-1/2 -top-16 transform -translate-x-1/2 w-40 h-40 m-auto"
-                  animate={{ scale: 1, opacity: 1 }}
-                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  initial={{ opacity: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ delay: 0.2 }}
                 >
