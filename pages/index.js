@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Head from "next/head";
 import { useSWRInfinite } from "swr";
 import Pokemon from "../components/Pokemon";
+import Container from "../components/Container";
 import { motion } from "framer-motion";
 
 const easing = [0.6, -0.05, 0.01, 0.99];
@@ -55,9 +55,6 @@ function CatchEmAll() {
 
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
-      <Head>
-        <title>寶可夢圖鑑</title>
-      </Head>
       <motion.section
         variants={stagger}
         className="container px-4 py-6 mx-auto"
@@ -174,7 +171,11 @@ function CatchEmAll() {
 }
 
 export default function Home() {
-  return <CatchEmAll />;
+  return (
+    <Container title="寶可夢圖鑑" description="宝可梦的描述">
+      <CatchEmAll />
+    </Container>
+  );
 }
 
 function SkeletonPoke({ type = "short" }) {
