@@ -101,7 +101,7 @@ function Post({ pokemon, pokemonSpecies }) {
         <div className="h-screen w-full">
           <div className="fixed inset-0 flex w-full justify-between h-20 px-4 items-center">
             <Link href="/">
-              <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white text-2xl bg-gray-600">
+              <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-2xl">
                 <HomeIcon className="w-6 h-6" />
               </a>
             </Link>
