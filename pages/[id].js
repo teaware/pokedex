@@ -110,7 +110,7 @@ function Post({ pokemon, pokemonSpecies }) {
           </div>
 
           <div className="h-full flex justify-center items-center">
-            <div className="xs:block hidden text-white mx-4">
+            <div className="xs:block hidden text-white ml-4">
               {pokemon.id === 1 ? (
                 <button
                   disabled
@@ -129,7 +129,7 @@ function Post({ pokemon, pokemonSpecies }) {
 
             <motion.div
               variants={stagger}
-              className="pokemon w-full sm:w-1/2 max-w-lg"
+              className="pokemon w-full sm:w-1/2 max-w-lg mx-4"
             >
               <motion.div
                 className={`poke-img rounded-t-md text-center pt-24 pb-4 ${bgc} relative`}
@@ -184,7 +184,7 @@ function Post({ pokemon, pokemonSpecies }) {
               </motion.div>
             </motion.div>
 
-            <div className="xs:block hidden text-white mx-4">
+            <div className="xs:block hidden text-white mr-4">
               {pokemon.id === 200 ? (
                 <button
                   disabled
