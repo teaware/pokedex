@@ -99,7 +99,7 @@ function Post({ pokemon, pokemonSpecies }) {
     <Container title={theName} description="宝可梦的描述">
       <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
         <div className="h-screen w-full">
-          <div className="fixed inset-0 flex w-full justify-between h-20 px-4 items-center">
+          <div className="fixed inset-0 flex w-full justify-between h-20 px-4 pt-safe-top items-center">
             <Link href="/">
               <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-2xl">
                 <HomeIcon className="w-6 h-6" />
@@ -110,20 +110,22 @@ function Post({ pokemon, pokemonSpecies }) {
           </div>
 
           <div className="h-full flex justify-center items-center">
-            {pokemon.id === 1 ? (
-              <button
-                disabled
-                className="rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-600 opacity-50 cursor-not-allowed mr-8"
-              >
-                <LeftIcon />
-              </button>
-            ) : (
-              <Link href={`/${pokemon.id - 1}`}>
-                <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-600 mr-8">
+            <div className="xs:block hidden text-white mx-4">
+              {pokemon.id === 1 ? (
+                <button
+                  disabled
+                  className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600 opacity-50 cursor-not-allowed"
+                >
                   <LeftIcon />
-                </a>
-              </Link>
-            )}
+                </button>
+              ) : (
+                <Link href={`/${pokemon.id - 1}`}>
+                  <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
+                    <LeftIcon />
+                  </a>
+                </Link>
+              )}
+            </div>
 
             <motion.div
               variants={stagger}
@@ -182,20 +184,22 @@ function Post({ pokemon, pokemonSpecies }) {
               </motion.div>
             </motion.div>
 
-            {pokemon.id === 200 ? (
-              <button
-                disabled
-                className="rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-600 opacity-50 cursor-not-allowed ml-8"
-              >
-                <RightIcon />
-              </button>
-            ) : (
-              <Link href={`/${pokemon.id + 1}`}>
-                <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-white bg-gray-600 ml-8">
+            <div className="xs:block hidden text-white mx-4">
+              {pokemon.id === 200 ? (
+                <button
+                  disabled
+                  className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600 opacity-50 cursor-not-allowed ml-8"
+                >
                   <RightIcon />
-                </a>
-              </Link>
-            )}
+                </button>
+              ) : (
+                <Link href={`/${pokemon.id + 1}`}>
+                  <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
+                    <RightIcon />
+                  </a>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </motion.div>

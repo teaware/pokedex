@@ -18,7 +18,7 @@ export default function Container(props) {
         <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
       </Head>
 
-      <div className="flex flex-col w-full min-h-screen font-sans text-base antialiased text-gray-800 bg-gray-300">
+      <div className="flex flex-col w-full min-h-screen font-sans text-base antialiased pt-safe-top text-gray-800 bg-gray-300">
         <main>{children}</main>
       </div>
     </>

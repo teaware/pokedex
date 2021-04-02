@@ -15,6 +15,15 @@ module.exports = {
   darkMode: false,
   theme: {
     extend: {
+      screens: {
+        xs: "376px",
+      },
+      spacing: {
+        "safe-top": "env(safe-area-inset-top)",
+        "safe-bottom": "env(safe-area-inset-bottom)",
+        "safe-left": "env(safe-area-inset-left)",
+        "safe-right": "env(safe-area-inset-right)",
+      },
       keyframes: {
         pulse: {
           "0%, 100%": {
