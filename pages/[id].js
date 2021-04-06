@@ -174,10 +174,16 @@ function Post({ pokemon, pokemonSpecies }) {
                   </div>
                 </div>
                 <div className="py-2">
-                  {pokemon.stats.map((stat) => (
+                  {pokemon.stats.map((stat, i) => (
                     <div key={stat.stat.name} className="py-1">
                       <span className="uppercase">{stat.stat.name}</span>:{" "}
                       {stat.base_stat}
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: `${stat.base_stat / 2}%` }}
+                        transition={{ duration: 0.5, delay: i * 0.1 }}
+                        className="h-1 rounded-md bg-green-500"
+                      ></motion.div>
                     </div>
                   ))}
                 </div>

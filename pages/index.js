@@ -54,7 +54,11 @@ function CatchEmAll() {
   const [open, setOpen] = useState("");
 
   return (
-    <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
+    <motion.div
+      initial={isLoadingInitialData ? "initial" : false}
+      animate="animate"
+      exit={{ opacity: 0 }}
+    >
       <motion.section
         variants={stagger}
         className="container px-4 py-6 mx-auto"
@@ -161,7 +165,7 @@ function CatchEmAll() {
             ) : isReachingEnd ? (
               "No More Pokémon"
             ) : (
-              "Load More Pokémon"
+              "Load More"
             )}
           </button>
         </motion.div>
