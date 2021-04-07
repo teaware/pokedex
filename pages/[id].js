@@ -147,6 +147,28 @@ function Post({ pokemon, pokemonSpecies }) {
                 variants={fadeInUp}
               >
                 <motion.div
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.1, opacity: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="xs:hidden absolute top-4 left-4 text-white"
+                >
+                  {pokemon.id === 1 ? (
+                    <button
+                      disabled
+                      className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600 opacity-50 cursor-not-allowed"
+                    >
+                      <LeftIcon />
+                    </button>
+                  ) : (
+                    <Link href={`/${pokemon.id - 1}`}>
+                      <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
+                        <LeftIcon />
+                      </a>
+                    </Link>
+                  )}
+                </motion.div>
+                <motion.div
                   className="absolute -top-16 left-0 right-0 w-40 h-40 m-auto"
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
@@ -160,6 +182,28 @@ function Post({ pokemon, pokemonSpecies }) {
                     width="475"
                     height="475"
                   />
+                </motion.div>
+                <motion.div
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.1, opacity: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="xs:hidden absolute top-4 right-4 text-white"
+                >
+                  {pokemon.id === 200 ? (
+                    <button
+                      disabled
+                      className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600 opacity-50 cursor-not-allowed ml-8"
+                    >
+                      <RightIcon />
+                    </button>
+                  ) : (
+                    <Link href={`/${pokemon.id + 1}`}>
+                      <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
+                        <RightIcon />
+                      </a>
+                    </Link>
+                  )}
                 </motion.div>
                 <div className="text-5xl opacity-50">{theName}</div>
                 <div className="my-2">
