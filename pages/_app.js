@@ -4,13 +4,13 @@ import { SWRConfig } from "swr";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   return (
-    <AnimatePresence exitBeforeEnter>
-      <SWRConfig value={{ fetcher }}>
-        <Component {...pageProps} />
-      </SWRConfig>
-    </AnimatePresence>
+    <SWRConfig value={{ fetcher }}>
+      <AnimatePresence exitBeforeEnter>
+        <Component {...pageProps} key={router.route} />
+      </AnimatePresence>
+    </SWRConfig>
   );
 }
 

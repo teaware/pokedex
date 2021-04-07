@@ -8,7 +8,7 @@ const easing = [0.175, 0.85, 0.42, 0.96];
 const stagger = {
   animate: {
     transition: {
-      staggerChildren: 0.075,
+      staggerChildren: 0.1,
     },
   },
 };
@@ -19,13 +19,18 @@ const fadeInUp = {
     opacity: 0,
     transition: { duration: 0.6, ease: easing },
   },
-  animate: {
+  enter: {
     y: 0,
     opacity: 1,
     transition: {
       duration: 0.6,
       ease: easing,
     },
+  },
+  exit: {
+    y: 160,
+    opacity: 0,
+    transition: { duration: 0.3, ease: easing },
   },
 };
 
@@ -97,7 +102,7 @@ function Post({ pokemon, pokemonSpecies }) {
 
   return (
     <Container title={theName} description="宝可梦的描述">
-      <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
+      <motion.div initial="initial" animate="enter" exit="exit">
         <div className="h-screen w-full">
           <div className="fixed inset-0 flex w-full justify-between h-20 px-4 pt-safe-top items-center">
             <Link href="/">
@@ -110,7 +115,13 @@ function Post({ pokemon, pokemonSpecies }) {
           </div>
 
           <div className="h-full flex justify-center items-center">
-            <div className="xs:block hidden text-white ml-4">
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.1, opacity: 0 }}
+              transition={{ delay: 0.2 }}
+              className="xs:block hidden text-white ml-4"
+            >
               {pokemon.id === 1 ? (
                 <button
                   disabled
@@ -125,7 +136,7 @@ function Post({ pokemon, pokemonSpecies }) {
                   </a>
                 </Link>
               )}
-            </div>
+            </motion.div>
 
             <motion.div
               variants={stagger}
@@ -141,6 +152,7 @@ function Post({ pokemon, pokemonSpecies }) {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0, opacity: 0 }}
                   transition={{ delay: 0.2 }}
+                  whileHover={{ scale: 0.96 }}
                 >
                   <Image
                     src={pokemon.officialArtwork}
@@ -190,7 +202,13 @@ function Post({ pokemon, pokemonSpecies }) {
               </motion.div>
             </motion.div>
 
-            <div className="xs:block hidden text-white mr-4">
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.1, opacity: 0 }}
+              transition={{ delay: 0.2 }}
+              className="xs:block hidden text-white mr-4"
+            >
               {pokemon.id === 200 ? (
                 <button
                   disabled
@@ -205,7 +223,7 @@ function Post({ pokemon, pokemonSpecies }) {
                   </a>
                 </Link>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </motion.div>

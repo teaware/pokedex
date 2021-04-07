@@ -12,13 +12,18 @@ const fadeInUp = {
     opacity: 0,
     transition: { duration: 0.6, ease: easing },
   },
-  animate: {
+  enter: {
     y: 0,
     opacity: 1,
     transition: {
       duration: 0.6,
       ease: easing,
     },
+  },
+  exit: {
+    y: 100,
+    opacity: 0,
+    transition: { duration: 0.4, ease: easing },
   },
 };
 
@@ -56,8 +61,8 @@ function CatchEmAll() {
   return (
     <motion.div
       initial={isLoadingInitialData ? "initial" : false}
-      animate="animate"
-      exit={{ opacity: 0 }}
+      animate="enter"
+      exit="exit"
     >
       <motion.section
         variants={stagger}
