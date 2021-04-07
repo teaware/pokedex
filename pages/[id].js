@@ -136,10 +136,10 @@ function Post({ pokemon, pokemonSpecies }) {
                 variants={fadeInUp}
               >
                 <motion.div
-                  className="absolute left-1/2 -top-16 transform -translate-x-1/2 w-40 h-40 m-auto"
-                  animate={{ opacity: 1 }}
-                  initial={{ opacity: 0 }}
-                  exit={{ opacity: 0 }}
+                  className="absolute -top-16 left-0 right-0 w-40 h-40 m-auto"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
                   transition={{ delay: 0.2 }}
                 >
                   <Image
