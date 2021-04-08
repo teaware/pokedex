@@ -6,7 +6,7 @@ import Container from "../components/Container";
 const easing = [0.175, 0.85, 0.42, 0.96];
 
 const stagger = {
-  animate: {
+  enter: {
     transition: {
       staggerChildren: 0.1,
     },
