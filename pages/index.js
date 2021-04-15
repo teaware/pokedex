@@ -8,22 +8,25 @@ const easing = [0.6, -0.05, 0.01, 0.99];
 
 const fadeInUp = {
   initial: {
-    y: 60,
+    y: -60,
     opacity: 0,
+    scale: 0.94,
     transition: { duration: 0.6, ease: easing },
   },
   enter: {
     y: 0,
     opacity: 1,
+    scale: 1,
     transition: {
       duration: 0.6,
       ease: easing,
     },
   },
   exit: {
-    y: 100,
+    y: 120,
     opacity: 0,
-    transition: { duration: 0.4, ease: easing },
+    scale: 0.9,
+    transition: { duration: 0.5, ease: easing },
   },
 };
 
@@ -31,6 +34,12 @@ const stagger = {
   enter: {
     transition: {
       staggerChildren: 0.1,
+    },
+  },
+  exit: {
+    transition: {
+      staggerChildren: 0.1,
+      staggerDirection: -1,
     },
   },
 };

@@ -8,7 +8,13 @@ const easing = [0.175, 0.85, 0.42, 0.96];
 const stagger = {
   enter: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.125,
+    },
+  },
+  exit: {
+    transition: {
+      staggerChildren: 0.075,
+      staggerDirection: -1,
     },
   },
 };
@@ -30,7 +36,7 @@ const fadeInUp = {
   exit: {
     y: 160,
     opacity: 0,
-    transition: { duration: 0.3, ease: easing },
+    transition: { duration: 0.5, ease: easing },
   },
 };
 
@@ -143,7 +149,7 @@ function Post({ pokemon, pokemonSpecies }) {
               className="pokemon w-full sm:w-1/2 max-w-lg mx-4"
             >
               <motion.div
-                className={`poke-img rounded-t-md text-center pt-24 pb-4 ${bgc} relative`}
+                className={`poke-img rounded-t-md text-center pt-24 pb-4 transition duration-75 ${bgc} relative`}
                 variants={fadeInUp}
               >
                 <motion.div
