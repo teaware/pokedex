@@ -85,45 +85,7 @@ function CatchEmAll() {
             variants={fadeInUp}
             className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
           >
-            <div className="animate-pulse">
-              <SkeletonPoke type="short" />
-            </div>
-            <div
-              className="animate-pulse"
-              style={{
-                animationFillMode: "backwards",
-                animationDelay: "150ms",
-              }}
-            >
-              <SkeletonPoke type="long" />
-            </div>
-            <div
-              className="animate-pulse"
-              style={{
-                animationFillMode: "backwards",
-                animationDelay: "150ms",
-              }}
-            >
-              <SkeletonPoke type="long" />
-            </div>
-            <div
-              className="animate-pulse"
-              style={{
-                animationFillMode: "backwards",
-                animationDelay: "300ms",
-              }}
-            >
-              <SkeletonPoke type="short" />
-            </div>
-            <div
-              className="animate-pulse"
-              style={{
-                animationFillMode: "backwards",
-                animationDelay: "450ms",
-              }}
-            >
-              <SkeletonPoke type="long" />
-            </div>
+            <Skeletons />
           </motion.div>
         ) : (
           <motion.div
@@ -200,7 +162,7 @@ export default function Home() {
   );
 }
 
-function SkeletonPoke({ type = "short" }) {
+const SkeletonPoke = ({ type = "short" }) => {
   return (
     <div className="rounded-md shadow-md w-full p-2 bg-gray-200">
       <div className="flex justify-between items-center px-1">
@@ -219,4 +181,50 @@ function SkeletonPoke({ type = "short" }) {
       </div>
     </div>
   );
-}
+};
+
+const Skeletons = () => {
+  return (
+    <>
+      <div className="animate-pulse">
+        <SkeletonPoke type="short" />
+      </div>
+      <div
+        className="animate-pulse"
+        style={{
+          animationFillMode: "backwards",
+          animationDelay: "150ms",
+        }}
+      >
+        <SkeletonPoke type="long" />
+      </div>
+      <div
+        className="animate-pulse"
+        style={{
+          animationFillMode: "backwards",
+          animationDelay: "150ms",
+        }}
+      >
+        <SkeletonPoke type="long" />
+      </div>
+      <div
+        className="animate-pulse"
+        style={{
+          animationFillMode: "backwards",
+          animationDelay: "300ms",
+        }}
+      >
+        <SkeletonPoke type="short" />
+      </div>
+      <div
+        className="animate-pulse"
+        style={{
+          animationFillMode: "backwards",
+          animationDelay: "450ms",
+        }}
+      >
+        <SkeletonPoke type="long" />
+      </div>
+    </>
+  );
+};
