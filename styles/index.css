@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+main {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 .bg-white-400 {
   background-color: #f5f4f4;
 }

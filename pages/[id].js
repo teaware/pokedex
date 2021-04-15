@@ -111,7 +111,7 @@ function Post({ pokemon, pokemonSpecies }) {
       <motion.div initial="initial" animate="enter" exit="exit">
         <div className="h-screen w-full">
           <div className="fixed inset-0 flex w-full justify-between h-20 px-4 pt-safe-top items-center">
-            <Link href="/">
+            <Link href="/" scroll={false}>
               <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-2xl">
                 <HomeIcon className="w-6 h-6" />
               </a>
@@ -149,7 +149,7 @@ function Post({ pokemon, pokemonSpecies }) {
               className="pokemon w-full sm:w-1/2 max-w-lg mx-4"
             >
               <motion.div
-                className={`poke-img rounded-t-md text-center pt-24 pb-4 transition duration-75 ${bgc} relative`}
+                className={`poke-img rounded-t-md text-center pt-28 pb-1 transition duration-75 ${bgc} relative`}
                 variants={fadeInUp}
               >
                 <motion.div
@@ -175,7 +175,7 @@ function Post({ pokemon, pokemonSpecies }) {
                   )}
                 </motion.div>
                 <motion.div
-                  className="absolute -top-16 left-0 right-0 w-40 h-40 m-auto"
+                  className="absolute -top-10 left-0 right-0 w-40 h-40 m-auto"
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0, opacity: 0 }}
@@ -242,7 +242,10 @@ function Post({ pokemon, pokemonSpecies }) {
                       {stat.base_stat}
                       <motion.div
                         initial={{ width: 0 }}
-                        animate={{ width: `${stat.base_stat / 2}%` }}
+                        animate={{
+                          width: `${stat.base_stat / 2}%`,
+                          maxWidth: "100%",
+                        }}
                         transition={{ duration: 0.5, delay: i * 0.1 }}
                         className="h-1 rounded-md bg-green-500"
                       ></motion.div>
