@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Container from "../components/Container";
-import { BlurImage } from "../components/BlurImage";
+import Container from "../../components/Container";
+import { BlurImage } from "../../components/BlurImage";
 
 // This function gets called at build time
 export async function getStaticPaths() {
