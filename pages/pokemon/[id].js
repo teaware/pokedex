@@ -76,7 +76,7 @@ function Post({ pokemon, pokemonSpecies }) {
                   <LeftIcon />
                 </button>
               ) : (
-                <Link href={`/${pokemon.id - 1}`}>
+                <Link href={`/pokemon/${pokemon.id - 1}`}>
                   <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
                     <LeftIcon />
                   </a>
@@ -107,7 +107,7 @@ function Post({ pokemon, pokemonSpecies }) {
                       <LeftIcon />
                     </button>
                   ) : (
-                    <Link href={`/${pokemon.id - 1}`}>
+                    <Link href={`/pokemon/${pokemon.id - 1}`}>
                       <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
                         <LeftIcon />
                       </a>
@@ -146,7 +146,7 @@ function Post({ pokemon, pokemonSpecies }) {
                       <RightIcon />
                     </button>
                   ) : (
-                    <Link href={`/${pokemon.id + 1}`}>
+                    <Link href={`/pokemon/${pokemon.id + 1}`}>
                       <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
                         <RightIcon />
                       </a>
@@ -212,7 +212,7 @@ function Post({ pokemon, pokemonSpecies }) {
                   <RightIcon />
                 </button>
               ) : (
-                <Link href={`/${pokemon.id + 1}`}>
+                <Link href={`/pokemon/${pokemon.id + 1}`}>
                   <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
                     <RightIcon />
                   </a>

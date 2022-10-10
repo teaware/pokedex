@@ -16,7 +16,7 @@ export default function Pokemon({ name, id }) {
     <>
       {pokemon ? (
         <div className="rounded-md shadow-md w-full p-2 bg-white">
-          <Link href={`/${id}`} scroll={false}>
+          <Link href={`/pokemon/${id}`} scroll={false}>
             <a>
               <div className="poke-name flex justify-between items-center px-1">
                 <div>
