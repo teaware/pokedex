@@ -48,7 +48,15 @@ export default function Pokemon({ name, id }) {
           </Link>
         </div>
       ) : (
-        <div className="h-20" />
+        <div className="rounded-md shadow-md w-full p-2 bg-gray-200">
+          <div className="flex justify-between items-center px-1">
+            <div>
+              <div className="w-20 h-4 bg-gray-400 rounded-md mb-2"></div>
+              <div className="w-24 h-4 bg-gray-300 rounded-md"></div>
+            </div>
+            <div className="w-16 h-16 ml-1 bg-gray-400 rounded-sm"></div>
+          </div>
+        </div>
       )}
     </>
   );
