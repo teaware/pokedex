@@ -12,7 +12,7 @@ module.exports = {
       ],
     },
   },
-  darkMode: false,
+  darkMode: "media",
   theme: {
     extend: {
       screens: {

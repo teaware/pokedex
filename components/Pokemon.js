@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import Link from "next/link";
-import Image from "next/image";
+import { BlurImage } from "./BlurImage";
 
 export default function Pokemon({ name, id }) {
   const { data: pokemon } = useSWR(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -33,8 +33,11 @@ export default function Pokemon({ name, id }) {
                   </div>
                 </div>
                 <div className="w-16 h-16 ml-1">
-                  <Image
-                    src={pokemon.sprites.front_default}
+                  <BlurImage
+                    // src={pokemon.sprites.front_default}
+                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${(
+                      "00" + pokemon.id
+                    ).slice(-3)}.png`}
                     alt={name}
                     width="96"
                     height="96"

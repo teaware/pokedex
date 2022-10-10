@@ -44,19 +44,17 @@ const stagger = {
   },
 };
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
 const PAGE_SIZE = 20;
 
 function CatchEmAll() {
   const { data, error, size, setSize } = useSWRInfinite(
-    (index) =>
+    (pageIndex) =>
       `https://pokeapi.co/api/v2/pokemon/?offset=${
-        PAGE_SIZE * index
-      }&limit=${PAGE_SIZE}`,
-    fetcher
+        PAGE_SIZE * pageIndex
+      }&limit=${PAGE_SIZE}`
   );
 
-  const pokemonList = data ? [].concat(...data) : [];
+  const pokemonList = data ? data : [];
   const isLoadingInitialData = !data && !error;
   const isLoadingMore =
     isLoadingInitialData ||
@@ -139,13 +137,9 @@ function CatchEmAll() {
                 Loading...
               </>
             ) : isReachingEnd ? (
-              <span>
-                No More<span className="xs:inline hidden"> Pokémon</span>
-              </span>
+              <span>No More</span>
             ) : (
-              <span>
-                Load More<span className="xs:inline hidden"> Pokémon</span>
-              </span>
+              <span>Load More</span>
             )}
           </button>
         </motion.div>
@@ -184,47 +178,21 @@ const SkeletonPoke = ({ type = "short" }) => {
 };
 
 const Skeletons = () => {
+  const items = [...new Array(20).keys()];
   return (
     <>
-      <div className="animate-pulse">
-        <SkeletonPoke type="short" />
-      </div>
-      <div
-        className="animate-pulse"
-        style={{
-          animationFillMode: "backwards",
-          animationDelay: "150ms",
-        }}
-      >
-        <SkeletonPoke type="long" />
-      </div>
-      <div
-        className="animate-pulse"
-        style={{
-          animationFillMode: "backwards",
-          animationDelay: "150ms",
-        }}
-      >
-        <SkeletonPoke type="long" />
-      </div>
-      <div
-        className="animate-pulse"
-        style={{
-          animationFillMode: "backwards",
-          animationDelay: "300ms",
-        }}
-      >
-        <SkeletonPoke type="short" />
-      </div>
-      <div
-        className="animate-pulse"
-        style={{
-          animationFillMode: "backwards",
-          animationDelay: "450ms",
-        }}
-      >
-        <SkeletonPoke type="long" />
-      </div>
+      {items.map((i) => (
+        <div
+          key={i}
+          className="animate-pulse"
+          style={{
+            animationFillMode: "backwards",
+            animationDelay: i % 3 === 0 ? "150ms" : "350ms",
+          }}
+        >
+          <SkeletonPoke type={i % 3 === 0 ? "long" : "short"} />
+        </div>
+      ))}
     </>
   );
 };

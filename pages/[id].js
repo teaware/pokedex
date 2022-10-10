@@ -1,106 +1,44 @@
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import Container from "../components/Container";
+import { BlurImage } from "../components/BlurImage";
 
-const easing = [0.175, 0.85, 0.42, 0.96];
-
-const stagger = {
-  enter: {
-    transition: {
-      staggerChildren: 0.125,
-    },
-  },
-  exit: {
-    transition: {
-      staggerChildren: 0.075,
-      staggerDirection: -1,
-    },
-  },
-};
-
-const fadeInUp = {
-  initial: {
-    y: 60,
-    opacity: 0,
-    transition: { duration: 0.6, ease: easing },
-  },
-  enter: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: easing,
-    },
-  },
-  exit: {
-    y: 160,
-    opacity: 0,
-    transition: { duration: 0.5, ease: easing },
-  },
-};
-
-const HomeIcon = (props) => {
-  return (
-    <svg
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-      />
-    </svg>
+// This function gets called at build time
+export async function getStaticPaths() {
+  // Call an external API endpoint to get posts
+  const res = await fetch(
+    "https://pokeapi.co/api/v2/pokemon?limit=2000&offset=0"
   );
-};
-const LeftIcon = (props) => {
-  return (
-    <svg
-      className="w-6 h-6"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M10 19l-7-7m0 0l7-7m-7 7h18"
-      />
-    </svg>
-  );
-};
+  const posts = await res.json();
 
-const RightIcon = (props) => {
-  return (
-    <svg
-      className="w-6 h-6"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M14 5l7 7m0 0l-7 7m7-7H3"
-      />
-    </svg>
-  );
-};
+  const paths = posts.results.map((post) => ({
+    params: { id: post.url.split("pokemon/")[1].split("/")[0] },
+  }));
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false };
+}
+
+// This function gets called at build time
+export async function getStaticProps({ params }) {
+  // params contains the post `id`.
+  // If the route is like /posts/1, then params.id is 1
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.id}`);
+  const pokemon = await res.json();
+
+  const res2 = await fetch(pokemon.species.url);
+  const pokemonSpecies = await res2.json();
+
+  // Pass data to the page via props
+  return { props: { pokemon, pokemonSpecies } };
+}
 
 function Post({ pokemon, pokemonSpecies }) {
   const bgc = pokemonSpecies
     ? "bg-" + pokemonSpecies.color.name + "-400"
     : "bg-gray-400"; // background-color
-  const names = pokemonSpecies ? [].concat(...pokemonSpecies.names) : [];
+  const names = pokemonSpecies ? pokemonSpecies.names : [];
   const lan = names.filter((obj) => {
     return obj.language.name === "zh-Hant"; // SET the Language you want
   });
@@ -117,7 +55,9 @@ function Post({ pokemon, pokemonSpecies }) {
               </a>
             </Link>
             {/* <h2 className="font-mono text-2xl capitalize">{pokemon.name}</h2> */}
-            <div className="font-mono text-lg">#{pokemon.paddedId}</div>
+            <div className="font-mono text-lg">
+              #{("00" + pokemon.id).slice(-3)}
+            </div>
           </div>
 
           <div className="h-full flex justify-center items-center">
@@ -180,10 +120,12 @@ function Post({ pokemon, pokemonSpecies }) {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0, opacity: 0 }}
                   transition={{ delay: 0.2 }}
-                  whileHover={{ scale: 0.96 }}
                 >
-                  <Image
-                    src={pokemon.officialArtwork}
+                  <BlurImage
+                    // src={pokemon.officialArtwork}
+                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${(
+                      "00" + pokemon.id
+                    ).slice(-3)}.png`}
                     alt={pokemon.name}
                     width="475"
                     height="475"
@@ -284,35 +226,97 @@ function Post({ pokemon, pokemonSpecies }) {
   );
 }
 
-// This function gets called at build time
-export async function getStaticPaths() {
-  // Call an external API endpoint to get posts
-  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=200");
-  const posts = await res.json();
+const easing = [0.175, 0.85, 0.42, 0.96];
 
-  const paths = posts.results.map((post) => ({
-    params: { id: post.url.split("pokemon/")[1].split("/")[0] },
-  }));
+const stagger = {
+  enter: {
+    transition: {
+      staggerChildren: 0.125,
+    },
+  },
+  exit: {
+    transition: {
+      staggerChildren: 0.075,
+      staggerDirection: -1,
+    },
+  },
+};
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false };
-}
+const fadeInUp = {
+  initial: {
+    y: 60,
+    opacity: 0,
+    transition: { duration: 0.6, ease: easing },
+  },
+  enter: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+    },
+  },
+  exit: {
+    y: 160,
+    opacity: 0,
+    transition: { duration: 0.5, ease: easing },
+  },
+};
 
-// This function gets called at build time
-export async function getStaticProps({ params }) {
-  // params contains the post `id`.
-  // If the route is like /posts/1, then params.id is 1
-  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.id}`);
-  const pokemon = await res.json();
-  pokemon.paddedId = ("00" + pokemon.id).slice(-3);
-  pokemon.officialArtwork = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
+const HomeIcon = (props) => {
+  return (
+    <svg
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+      />
+    </svg>
+  );
+};
+const LeftIcon = () => {
+  return (
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M10 19l-7-7m0 0l7-7m-7 7h18"
+      />
+    </svg>
+  );
+};
 
-  const res2 = await fetch(pokemon.species.url);
-  const pokemonSpecies = await res2.json();
-
-  // Pass data to the page via props
-  return { props: { pokemon, pokemonSpecies } };
-}
+const RightIcon = () => {
+  return (
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M14 5l7 7m0 0l-7 7m7-7H3"
+      />
+    </svg>
+  );
+};
 
 export default Post;
