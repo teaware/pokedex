@@ -46,7 +46,7 @@ export default function Pokemon({ name, id }) {
                 <div className="w-16 h-16 ml-1">
                   <BlurImage
                     // src={pokemon.sprites.front_default}
-                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${(
+                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${(
                       "00" + pokemon.id
                     ).slice(-3)}.png`}
                     alt={name}
