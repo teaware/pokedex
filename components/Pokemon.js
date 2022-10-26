@@ -1,12 +1,23 @@
-import useSWR from "swr";
 import Link from "next/link";
 import { BlurImage } from "./BlurImage";
+import { useQuery } from "react-query";
+import fetch from "../lib/fetch";
 
 export default function Pokemon({ name, id }) {
-  const { data: pokemon } = useSWR(`https://pokeapi.co/api/v2/pokemon/${id}`);
-  const { data: pokemonSpecies } = useSWR(() => pokemon.species.url);
+  const { data: pokemon } = useQuery(["pokemon", id], () =>
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+  );
+  const speciesUrl = pokemon?.species.url;
+  const { data: pokemonSpecies } = useQuery(
+    ["pokemonSpecies", speciesUrl],
+    () => fetch(speciesUrl),
+    {
+      // The query will not execute until the speciesUrl exists
+      enabled: !!speciesUrl,
+    }
+  );
 
-  const names = pokemonSpecies ? [].concat(...pokemonSpecies.names) : [];
+  const names = pokemonSpecies ? pokemonSpecies.names : [];
   const lan = names.filter((obj) => {
     return obj.language.name === "zh-Hant"; // SET the Language you want
   });

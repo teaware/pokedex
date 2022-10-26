@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useSWRInfinite } from "swr";
 import Pokemon from "../components/Pokemon";
 import Container from "../components/Container";
 import { motion } from "framer-motion";
+import { QueryClient, dehydrate, useInfiniteQuery } from "react-query";
 
 const easing = [0.6, -0.05, 0.01, 0.99];
 
@@ -44,30 +44,25 @@ const stagger = {
   },
 };
 
-const PAGE_SIZE = 20;
+const fetchPokemon = async ({
+  pageParam = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20",
+}) => {
+  const request = await fetch(pageParam);
+  const { results, next } = await request.json();
+  return { response: results, nextPage: next };
+};
 
-function CatchEmAll() {
-  const { data, error, size, setSize } = useSWRInfinite(
-    (pageIndex) =>
-      `https://pokeapi.co/api/v2/pokemon/?offset=${
-        PAGE_SIZE * pageIndex
-      }&limit=${PAGE_SIZE}`
-  );
-
-  const pokemonList = data ? data : [];
-  const isLoadingInitialData = !data && !error;
-  const isLoadingMore =
-    isLoadingInitialData ||
-    (size > 0 && data && typeof data[size - 1] === "undefined");
-  const isEmpty = data?.[0]?.length === 0;
-  const isReachingEnd =
-    isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
+const CatchEmAll = () => {
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery("pokemon", fetchPokemon, {
+      getNextPageParam: (lastPage) => lastPage.nextPage,
+    });
 
   const [open, setOpen] = useState("");
 
   return (
     <motion.div
-      initial={isLoadingInitialData ? "initial" : false}
+      initial={isLoading ? "initial" : false}
       animate="enter"
       exit="exit"
     >
@@ -78,7 +73,7 @@ function CatchEmAll() {
         <motion.h1 variants={fadeInUp} className="text-4xl text-center mb-8">
           寶可夢圖鑑
         </motion.h1>
-        {isLoadingInitialData ? (
+        {isLoading ? (
           <motion.div
             variants={fadeInUp}
             className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
@@ -90,17 +85,17 @@ function CatchEmAll() {
             variants={fadeInUp}
             className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
           >
-            {pokemonList.map((pokemon) => {
-              return pokemon.results.map((result) => (
+            {data.pages.map((group) =>
+              group.response.map((pokemon) => (
                 <Pokemon
-                  key={result.name}
+                  key={pokemon.name}
                   open={open}
                   setOpen={setOpen}
-                  name={result.name}
-                  id={result.url.split("pokemon/")[1].split("/")[0]}
+                  name={pokemon.name}
+                  id={pokemon.url.split("pokemon/")[1].split("/")[0]}
                 />
-              ));
-            })}
+              ))
+            )}
           </motion.div>
         )}
         <motion.div
@@ -109,10 +104,10 @@ function CatchEmAll() {
         >
           <button
             className="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
-            disabled={isLoadingMore || isReachingEnd}
-            onClick={() => setSize(size + 1)}
+            disabled={!hasNextPage || isFetchingNextPage}
+            onClick={() => fetchNextPage()}
           >
-            {isLoadingMore ? (
+            {isFetchingNextPage ? (
               <>
                 <svg
                   className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -136,7 +131,7 @@ function CatchEmAll() {
                 </svg>
                 Loading...
               </>
-            ) : isReachingEnd ? (
+            ) : hasNextPage ? (
               <span>No More</span>
             ) : (
               <span>Load More</span>
@@ -146,7 +141,19 @@ function CatchEmAll() {
       </motion.section>
     </motion.div>
   );
-}
+};
+
+// export async function getStaticProps() {
+//   const queryClient = new QueryClient();
+
+//   await queryClient.prefetchQuery("pokemon", () => fetchPokemon());
+
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient),
+//     },
+//   };
+// }
 
 export default function Home() {
   return (

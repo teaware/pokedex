@@ -40,7 +40,7 @@ export default function Lost() {
                     height="475"
                   />
                 </motion.div>
-                <div>找不到了😢</div>
+                <div className="p-8">找不到了😢</div>
               </motion.div>
             </motion.div>
           </div>
