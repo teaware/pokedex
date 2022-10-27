@@ -36,11 +36,9 @@ export default function Lost() {
                     // src={pokemon.officialArtwork}
                     src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png`}
                     alt=""
-                    width="475"
-                    height="475"
                   />
                 </motion.div>
-                <div className="p-8">找不到了😢</div>
+                <div className="p-8">找不到了 😢</div>
               </motion.div>
             </motion.div>
           </div>

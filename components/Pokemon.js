@@ -43,7 +43,7 @@ export default function Pokemon({ name, id }) {
                     ))}
                   </div>
                 </div>
-                <div className="w-16 h-16 ml-1">
+                <div className="w-16 h-16 ml-1 relative">
                   <BlurImage
                     // src={pokemon.sprites.front_default}
                     src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${(
