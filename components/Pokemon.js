@@ -50,8 +50,6 @@ export default function Pokemon({ name, id }) {
                       "00" + pokemon.id
                     ).slice(-3)}.png`}
                     alt={name}
-                    width="96"
-                    height="96"
                   />
                 </div>
               </div>

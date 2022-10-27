@@ -11,8 +11,8 @@ export function BlurImage({ alt, src, width, height }) {
     <Image
       alt={alt ? alt : ""}
       src={src}
-      width={width}
-      height={height}
+      layout="fill"
+      objectFit="cover"
       className={cn(
         "duration-700 ease-in-out",
         isLoading

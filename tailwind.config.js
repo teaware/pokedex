@@ -13,9 +13,6 @@ module.exports = {
   darkMode: "media",
   theme: {
     extend: {
-      screens: {
-        xs: "376px",
-      },
       spacing: {
         "safe-top": "env(safe-area-inset-top)",
         "safe-bottom": "env(safe-area-inset-bottom)",

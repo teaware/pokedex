@@ -50,7 +50,10 @@ function Post({ pokemon, pokemonSpecies }) {
         <div className="h-screen w-full">
           <div className="fixed inset-0 flex w-full justify-between h-20 px-4 pt-safe-top items-center">
             <Link href="/" scroll={false}>
-              <a className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-2xl">
+              <a
+                aria-label="Home"
+                className="cursor-pointer rounded-full h-10 w-10 flex items-center justify-center text-2xl"
+              >
                 <HomeIcon className="w-6 h-6" />
               </a>
             </Link>
@@ -66,10 +69,11 @@ function Post({ pokemon, pokemonSpecies }) {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.1, opacity: 0 }}
               transition={{ delay: 0.2 }}
-              className="xs:block hidden text-white ml-4"
+              className="sm:block hidden text-white ml-4"
             >
               {pokemon.id === 1 ? (
                 <button
+                  aria-label="Previous Button"
                   disabled
                   className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600 opacity-50 cursor-not-allowed"
                 >
@@ -77,7 +81,10 @@ function Post({ pokemon, pokemonSpecies }) {
                 </button>
               ) : (
                 <Link href={`/pokemon/${pokemon.id - 1}`}>
-                  <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
+                  <a
+                    aria-label="Previous Button"
+                    className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600"
+                  >
                     <LeftIcon />
                   </a>
                 </Link>
@@ -97,10 +104,11 @@ function Post({ pokemon, pokemonSpecies }) {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.1, opacity: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="xs:hidden absolute top-4 left-4 text-white"
+                  className="sm:hidden absolute top-4 left-4 text-white"
                 >
                   {pokemon.id === 1 ? (
                     <button
+                      aria-label="Previous Button"
                       disabled
                       className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600 opacity-50 cursor-not-allowed"
                     >
@@ -108,7 +116,10 @@ function Post({ pokemon, pokemonSpecies }) {
                     </button>
                   ) : (
                     <Link href={`/pokemon/${pokemon.id - 1}`}>
-                      <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
+                      <a
+                        aria-label="Previous Button"
+                        className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600"
+                      >
                         <LeftIcon />
                       </a>
                     </Link>
@@ -127,8 +138,6 @@ function Post({ pokemon, pokemonSpecies }) {
                       "00" + pokemon.id
                     ).slice(-3)}.png`}
                     alt={pokemon.name}
-                    width="475"
-                    height="475"
                   />
                 </motion.div>
                 <motion.div
@@ -136,10 +145,11 @@ function Post({ pokemon, pokemonSpecies }) {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.1, opacity: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="xs:hidden absolute top-4 right-4 text-white"
+                  className="sm:hidden absolute top-4 right-4 text-white"
                 >
                   {pokemon.id === 200 ? (
                     <button
+                      aria-label="Next Button"
                       disabled
                       className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600 opacity-50 cursor-not-allowed ml-8"
                     >
@@ -147,13 +157,16 @@ function Post({ pokemon, pokemonSpecies }) {
                     </button>
                   ) : (
                     <Link href={`/pokemon/${pokemon.id + 1}`}>
-                      <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
+                      <a
+                        aria-label="Next Button"
+                        className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600"
+                      >
                         <RightIcon />
                       </a>
                     </Link>
                   )}
                 </motion.div>
-                <div className="text-5xl opacity-50">{theName}</div>
+                <div className="text-5xl text-slate-500">{theName}</div>
                 <div className="my-2">
                   {pokemon.types.map((type) => (
                     <span
@@ -202,10 +215,11 @@ function Post({ pokemon, pokemonSpecies }) {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.1, opacity: 0 }}
               transition={{ delay: 0.2 }}
-              className="xs:block hidden text-white mr-4"
+              className="sm:block hidden text-white mr-4"
             >
               {pokemon.id === 200 ? (
                 <button
+                  aria-label="Next Button"
                   disabled
                   className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600 opacity-50 cursor-not-allowed ml-8"
                 >
@@ -213,7 +227,10 @@ function Post({ pokemon, pokemonSpecies }) {
                 </button>
               ) : (
                 <Link href={`/pokemon/${pokemon.id + 1}`}>
-                  <a className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600">
+                  <a
+                    aria-label="Next Button"
+                    className="rounded-full h-10 w-10 flex items-center justify-center bg-gray-600"
+                  >
                     <RightIcon />
                   </a>
                 </Link>
