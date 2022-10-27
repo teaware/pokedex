@@ -132,9 +132,9 @@ const CatchEmAll = () => {
                 Loading...
               </>
             ) : hasNextPage ? (
-              <span>No More</span>
-            ) : (
               <span>Load More</span>
+            ) : (
+              <span>No More</span>
             )}
           </button>
         </motion.div>
