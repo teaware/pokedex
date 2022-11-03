@@ -166,12 +166,12 @@ function Post({ pokemon, pokemonSpecies }) {
                     </Link>
                   )}
                 </motion.div>
-                <div className="text-5xl text-slate-500">{theName}</div>
+                <div className="text-5xl text-slate-500/50">{theName}</div>
                 <div className="my-2">
                   {pokemon.types.map((type) => (
                     <span
                       key={type.type.name}
-                      className="inline-block bg-gray-400 bg-opacity-25 rounded-lg px-2 text-sm text-gray-700 mr-2 mb-2"
+                      className="inline-block bg-slate-200 bg-opacity-25 rounded-lg px-2 text-sm text-slate-700 mr-2 mb-2 shadow-lg"
                     >
                       {type.type.name}
                     </span>

@@ -1,15 +1,13 @@
 module.exports = {
   content: ["./pages/**/*.js", "./components/**/*.js"],
-  options: {
-    safelist: [
-      "bg-red-400",
-      "bg-green-400",
-      "bg-yellow-400",
-      "bg-blue-400",
-      "bg-purple-400",
-      "bg-pink-400",
-    ],
-  },
+  safelist: [
+    "bg-red-400",
+    "bg-green-400",
+    "bg-yellow-400",
+    "bg-blue-400",
+    "bg-purple-400",
+    "bg-pink-400",
+  ],
   darkMode: "media",
   theme: {
     extend: {
